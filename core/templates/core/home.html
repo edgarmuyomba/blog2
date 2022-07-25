@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Blog
+{% endblock title %}
+
+{% block content %}
+    <p>
+        {{ message }}
+    </p>
+    {% if user.is_authenticated %}
+        <p>
+            <img src="{{ user.profile_picture.url }}" width="50", height="50">
+            Hello, {{ user.username }} -
+            <a href="{% url 'authentication:logout' %}">Logout</a>
+        </p>
+    {% else %}
+        <p>
+            <a href="{% url 'authentication:login' %}">Login</a> -
+            <a href="{% url 'authentication:signup' %}">Signup</a>
+        </p>
+    {% endif %}
+    {% for post in posts %}
+        <img src="{{ post.picture.url }}">
+        <h5>
+            <a href="{% url 'core:details' post.uuid %}">
+                {{ post.caption }}
+            </a>
+        </h5>
+        <P><small>{{ post.date_added|date:'M d, Y H:i' }}</small></P>
+        <p>{{ post.text|linebreaks|slice:":100 "}}...</p>
+    {% empty %}
+        <h1>We're cooking! Hold still...</h1>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ post.caption }}
+{% endblock title %}
+
+{% block content %}
+    <h5>{{ post.caption }} 
+        <small>
+            by {{ post.author }}, {{ post.date_added|date:'M d, Y, H:m'}}
+        </small>
+    </h5>
+    <img src="{{ post.picture.url }}" width="500", height="500">
+    <p>{{ post.text|linebreaks }}</p>
+{% endblock content %}

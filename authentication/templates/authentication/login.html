@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    LogIn
+{% endblock title %}
+
+{% block content %}
+    <p>
+        {{ message }}
+    </p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Submit</button>
+        <input name="next" type="hidden" value="{% url 'core:home' %}">
+    </form>
+    <p>
+        Not a User, <a href="{% url 'authentication:signup' %}">Signup</a>
+    </p>
+{% endblock content %}
